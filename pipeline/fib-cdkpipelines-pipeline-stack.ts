@@ -43,7 +43,7 @@ export class FibCdkpipelinesPipelineStack extends Stack {
       sourceAction: new codepipeline_actions.GitHubSourceAction({
         actionName: "Github",
         output: sourceArtifact,
-        oauthToken: SecretValue.secretsManager(process.env.SECRETSMANAGER_GITHUB_TOKEN!),
+        oauthToken: new SecretValue(process.env.GITHUB_TOKEN!),
         owner: process.env.GITHUB_USERNAME!,
         repo: process.env.GITHUB_REPO!,
         
@@ -56,7 +56,7 @@ export class FibCdkpipelinesPipelineStack extends Stack {
         environmentVariables: {
           S3_BUCKET: {value: process.env.S3_BUCKET},
           DYNAMODB_TABLE: {value: process.env.DYNAMODB_TABLE},
-          SECRETSMANAGER_GITHUB_TOKEN: { value: process.env.SECRETSMANAGER_GITHUB_TOKEN!},
+          GITHUB_TOKEN: { value: process.env.GITHUB_TOKEN!},
           GITHUB_USERNAME: { value: process.env.GITHUB_USERNAME!},
           GITHUB_REPO: { value: process.env.GITHUB_REPO!}
 
